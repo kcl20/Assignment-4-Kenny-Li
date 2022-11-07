@@ -1,0 +1,166 @@
+
+:root {
+    --dark-purple: #a22220;
+    --light-purple: #9953ae;
+  }
+
+* {
+    box-sizing: border-box;
+  }
+  
+  .navigation {
+    padding: 20px 40px;
+    font-size: 1.5em;
+    color: var(--dark-purple);
+    display: flex;
+    justify-content: space-between
+  }
+
+  .navigation:hover {
+    cursor: pointer;
+  }
+
+  /* body is flex container */
+  body {
+    display: flex;
+    font-family: Arial;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: flex-start;
+  }
+  
+  .large-font {
+    font-size: 3.5em;
+    text-align:center;
+    color:black;
+    font-weight: bold;
+  }
+  
+  .medium-font {
+    margin-top:20px;
+    font-size: 1.5em;
+    text-align:center;
+    color:black
+  }
+
+  .timer-element {
+    color: black;
+  }
+
+  .card {
+    width: 50%;
+    text-align:center;
+    margin: auto;
+    padding: 20px;
+  }
+
+  button {
+    background: var(--dark-purple);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 2em;
+    letter-spacing: 0.21px;
+    line-height: 16px;
+    max-width: 255px;
+    padding: 20px 52px;
+    text-align: center;
+    transition-duration: 0.15s;
+    transition-property: background-color;
+    transition-timing-function: linear;
+    margin-top: 0.6em;
+  }
+  
+
+button:hover {
+    background-color: var(--light-purple);
+}
+
+
+
+
+
+/* 
+  .reset-button {
+    font-size: 16px;
+    height: 30px;
+    line-height: 8px;
+    margin-top: 20px;
+  }
+  
+  .win-loss-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+  }
+  
+  */
+
+
+  
+  /* section {
+    flex: 0 auto;
+    padding: 8px;
+    margin-top: 50px;
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .word-guess {
+    width: 55vw;
+    height: 400px;
+  }
+  
+  .results {
+    width: 30vw;
+    height: 400px;
+  }
+  
+  .word-blanks {
+    line-height: 360px;
+  }
+  
+  .timer {
+    height: 240px;
+    padding: 10px;
+    background: #white;
+    color: #black;
+    text-align: center;
+  }
+  
+  .timer-text {
+    padding: 55px;
+  }
+  
+  @media screen and (max-width: 1183px) {
+    main {
+      flex-direction: column;
+    }
+  
+    .word-guess,
+    .results {
+      width: 90vw;
+    }
+  
+    section {
+      background-color: white;
+      margin: 20px auto;
+      width: 92vw;
+    }
+  }
+  
+  @media screen and (max-width: 504px) {
+    .large-font {
+      font-size: 2em;
+    }
+  
+    .reset-button {
+      font-size: 12px;
+      width: 20ox;
+      
+    }
+  
+    .timer {
+      height: 200px;
+    }
+    */
