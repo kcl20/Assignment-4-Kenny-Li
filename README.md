@@ -6,7 +6,7 @@ Displays a quiz of 5 questions, multiple choice.
 Answering a question correctly adds 10 points to the score.
 Answering a question incorrectly deducts 10 seconds from the timer.
 
-Screenshot: (./assets/Quiz screenshot.png)
+![screenshot](./assets/images/Quiz screenshot.png)
 
 
 ## Table of Contents (Optional)
