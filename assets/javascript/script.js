@@ -31,17 +31,18 @@ var enterInitialsMessage = document.createElement("div");
 var enterInitialsInput = document.createElement("input");
 var submitButton = document.createElement("button");
 var highScoresText = document.createElement("div");
-var highScoresListEl = $('#high-scores-list');
+var highScoresListEl = document.querySelector('#high-scores-list');
 var goBackButton = document.createElement("button");
 // create variables for tracking time and score
 var timer;
 var timerCount;
-var scoreCount = 0;
+var scoreCount;
 var highScores = [];
 
 function startGame() {
     //initial time on countdown starting from 60
     timerCount = 60;
+    scoreCount = 0;
     // Prevents start button from being clicked when round is in progress
     startButton.remove();
     //trigger startTimer and load first question
@@ -311,13 +312,12 @@ function endGame() {
     //display end game
     console.log("end game");
     startButton.remove();
+    clearInterval(timer);
     //trigger display high scores
    displayHighScores();
 }
 
 function displayHighScores() {
-    //hide the timer
-    timerText.remove();
     console.log("display high scores. score: " + scoreCount);
     console.log("timer count: " + timerCount);
     timeElapsed = 60 - timerCount;
@@ -325,6 +325,7 @@ function displayHighScores() {
     largeFont.textContent = "All done!";
     mediumFont.textContent = "Your final score is " + scoreCount + " in " + timeElapsed + " seconds.";
     console.log("final score:" + scoreCount + " in " + timeElapsed + " seconds.");
+    timerCount = 0;
     //display initials input
     mediumFont.appendChild(enterInitialsMessage);
     enterInitialsMessage.setAttribute("style", "font-size: 1em; margin-top: 20px; margin-bottom: 20px;");
@@ -342,30 +343,45 @@ function displayHighScores() {
 
 submitButton.addEventListener("click", function(event) {
     event.preventDefault();
-    var initials = document.querySelector("#user-initials").value;
-    var initialsAndScore = {
-        "initials": initials,
-        "score": scoreCount + " in " + timeElapsed + " seconds.",
-        };
-    console.log(initialsAndScore);
-    localStorage.setItem("initialsAndScore", JSON.stringify(initialsAndScore));
-
-    mediumFont.appendChild(highScoresText);
-    highScoresText.textContent = "High Scores";
-    highScoresText.setAttribute("style", "font-size: 2em; margin-top: 20px; margin-bottom: 20px;");
-    highScoresListEl.append("<li>" + initialsAndScore.initials + " - " + initialsAndScore.score + "</li>");
-    highScoresListEl.append(goBackButton);
-    goBackButton.textContent = "Go Back";
+    saveScore();
     }
 );
 
-function init() {
-    //grab any high scores from local storage
-    var storedHighScores = JSON.parse(localStorage.getItem("initialsAndScore"));
-    if (storedHighScores !== null) {
-        highScoresListEl.append("<li>" + storedHighScores.initials + " - " + storedHighScores.score + "</li>");
-    }
+function saveScore() {
+    //save user initials and score to local storage upon clicking Submit button
+    var initialsInput = document.querySelector("#user-initials").value;
+    var initialsInputAndScore = {
+        "initials": initialsInput,
+        "score": scoreCount + " in " + timeElapsed + " seconds.",
+        };
+    console.log(initialsInputAndScore);
+    highScores.push(initialsInputAndScore);
+    initialsInputAndScore = "";
+    localStorage.setItem("savedHighscores", JSON.stringify(highScores));
+    console.log(highScores);
+    renderHighScores();
 }
+
+function renderHighScores () {
+    mediumFont.appendChild(highScoresText);
+    highScoresText.textContent = "High Scores";
+    highScoresText.setAttribute("style", "font-size: 2em; margin-top: 20px; margin-bottom: 20px;");
+    highScoresText.appendChild(highScoresListEl);
+    // Render a new li for each highscore
+    for (var i = 0; i < highScores.length; i++) {
+        var highscoreEntry = highScores[i];
+        var li = document.createElement("li");
+        li.textContent = highscoreEntry.initials + " - " + highscoreEntry.score;
+        li.setAttribute("data-index", i);
+        highScoresListEl.appendChild(li);
+    }
+    highScoresListEl.append(goBackButton);
+    goBackButton.textContent = "Back";
+}
+
+
+
+
 
 // if view high scores is clicked during quiz, end any games in process
 highScoresLink.addEventListener('click', endGame);
@@ -378,6 +394,7 @@ goBackButton.addEventListener('click', function() {
     highScoresText.remove();
     goBackButton.remove();
     startGame();
+    scoreCount = 0;
     }
 );
 
