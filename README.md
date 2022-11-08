@@ -3,9 +3,10 @@
 ## Description
 
 Displays a quiz of 5 questions, multiple choice.
-Answering a question correctly adds to the score.
-
+Answering a question correctly adds 10 points to the score.
 Answering a question incorrectly deducts 10 seconds from the timer.
+
+Screenshot: (./assets/Quiz screenshot.png)
 
 
 ## Table of Contents (Optional)
@@ -41,7 +42,7 @@ n/a
 
 60 second countdown timer.
 
-Scores calculated based on time remaining on timer when the quiz is completed, as well as number of correct answers.
+Scores calculated based on number of correct answers.
 
 ## How to Contribute
 
