@@ -1,35 +1,31 @@
+// get html elements
 var highScoresLink = document.getElementById('view-high-scores');
 var timerText = document.getElementById('timer-text');
 var startButton = document.getElementById('start-button');
-
 var largeFont = document.querySelector(".large-font");
 var mediumFont = document.querySelector(".medium-font");
-
+// define variables for each choice, for each question. ex. Question 1, Choice 1. Question 1, Choice 2, etc.
 var q1c1 = document.createElement("button");
 var q1c2 = document.createElement("button");
 var q1c3 = document.createElement("button");
 var q1c4 = document.createElement("button");
-
 var q2c1 = document.createElement("button");
 var q2c2 = document.createElement("button");
 var q2c3 = document.createElement("button");
 var q2c4 = document.createElement("button");
-
 var q3c1 = document.createElement("button");
 var q3c2 = document.createElement("button");
 var q3c3 = document.createElement("button");
 var q3c4 = document.createElement("button");
-
 var q4c1 = document.createElement("button");
 var q4c2 = document.createElement("button");
 var q4c3 = document.createElement("button");
 var q4c4 = document.createElement("button");
-
 var q5c1 = document.createElement("button");
 var q5c2 = document.createElement("button");
 var q5c3 = document.createElement("button");
 var q5c4 = document.createElement("button");
-
+// create elements for high scores
 var answerDisplay = document.createElement("div");
 var enterInitialsMessage = document.createElement("div");
 var enterInitialsInput = document.createElement("input");
@@ -37,24 +33,21 @@ var submitButton = document.createElement("button");
 var highScoresText = document.createElement("div");
 var highScoresListEl = $('#high-scores-list');
 var goBackButton = document.createElement("button");
-
-
+// create variables for tracking time and score
 var timer;
 var timerCount;
 var scoreCount = 0;
 var highScores = [];
 
 function startGame() {
-    //initial time on countdown
+    //initial time on countdown starting from 60
     timerCount = 60;
     // Prevents start button from being clicked when round is in progress
     startButton.remove();
-    //trigger startTimer
+    //trigger startTimer and load first question
     startTimer();
     firstQuestion();
-
 }
-
 
 function startTimer() {
 //Sets timer
@@ -68,11 +61,11 @@ function startTimer() {
       endGame();
     }
     else if (timerCount < 0) {
+        // a wrong answer with less than 10 seconds left will cause timer to go negative. This will prevent that.
         clearInterval(timer);
         endGame();
     }
   }, 1000);
-
 }
 
 function firstQuestion() {
@@ -80,8 +73,8 @@ function firstQuestion() {
     largeFont.textContent = "Which one of these is not a Javascript datatype?";
     mediumFont.textContent = "";
     //display first question choices
-    //To do: add event listeners to each choice
     //To do: display in Flex columns
+    //To do: define questions and choices in array, and loop through array to display
     mediumFont.appendChild(q1c1);
     mediumFont.appendChild(q1c2);
     mediumFont.appendChild(q1c3);
@@ -94,7 +87,6 @@ function firstQuestion() {
     q1c2.textContent = "Number";
     q1c3.textContent = "String";
     q1c4.textContent = "Boolean";
-
     //display first question answer
     q1c1.addEventListener("click", function() {
         scoreCount = scoreCount + 10;
@@ -103,19 +95,16 @@ function firstQuestion() {
         rightAnswer();
         secondQuestion();
     });
-
     q1c2.addEventListener("click", function() {
         console.log("first question wrong");
         wrongAnswer();
         secondQuestion();
     });
-
     q1c3.addEventListener("click", function() {
         console.log("first question wrong");
         wrongAnswer();
         secondQuestion();
     });
-
     q1c4.addEventListener("click", function() {
         console.log("first question wrong");
         wrongAnswer();
@@ -126,11 +115,12 @@ function firstQuestion() {
 
 function secondQuestion() {
     largeFont.textContent = "Which one of these ways is NOT how you create a string?";
+    // remove previous question choices
     q1c1.remove();
     q1c2.remove();
     q1c3.remove();
     q1c4.remove();
-
+    // load second question choices
     mediumFont.appendChild(q2c1);
     mediumFont.appendChild(q2c2);
     mediumFont.appendChild(q2c3);
@@ -149,19 +139,16 @@ function secondQuestion() {
         wrongAnswer();
         thirdQuestion();
     });
-
     q2c2.addEventListener("click", function() {
         console.log("second question wrong");
         wrongAnswer();
         thirdQuestion();
     });
-
     q2c3.addEventListener("click", function() {
         console.log("second question wrong");
         wrongAnswer();
         thirdQuestion();
     });
-
     q2c4.addEventListener("click", function() {
         console.log("second question right");
         rightAnswer();
@@ -178,7 +165,6 @@ function thirdQuestion() {
     q2c2.remove();
     q2c3.remove();
     q2c4.remove();
-
     mediumFont.appendChild(q3c1);
     mediumFont.appendChild(q3c2);
     mediumFont.appendChild(q3c3);
@@ -187,7 +173,6 @@ function thirdQuestion() {
     q3c2.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q3c3.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q3c4.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
-
     q3c1.textContent = "JavaScript for loops are used after three loops";
     q3c2.textContent = "JavaScript for loops can be used to iterate through arrays";
     q3c3.textContent = "JavaScript for...in loops are used to iterate through an object's properties";
@@ -200,35 +185,29 @@ function thirdQuestion() {
         console.log("score: " + scoreCount);
         fourthQuestion();
     });
-
     q3c2.addEventListener("click", function() {
         console.log("third question wrong");
         wrongAnswer();
         fourthQuestion();
     });
-
     q3c3.addEventListener("click", function() {
         console.log("third question wrong");
         wrongAnswer();
         fourthQuestion();
     });
-
     q3c4.addEventListener("click", function() {
         console.log("third question wrong");
         wrongAnswer();
         fourthQuestion();
     });
-
 }
 
 function fourthQuestion() {
     largeFont.textContent = "Which operator is used to assign a value to a variable?";
-
     q3c1.remove();
     q3c2.remove();
     q3c3.remove();
     q3c4.remove();
-
     mediumFont.appendChild(q4c1);
     mediumFont.appendChild(q4c2);
     mediumFont.appendChild(q4c3);
@@ -237,7 +216,6 @@ function fourthQuestion() {
     q4c2.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q4c3.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q4c4.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
-
     q4c1.textContent = "===";
     q4c2.textContent = "==";
     q4c3.textContent = "=";
@@ -248,13 +226,11 @@ function fourthQuestion() {
         wrongAnswer(); 
         fifthQuestion();
     });
-
     q4c2.addEventListener("click", function() {
         console.log("fourth question wrong");
         wrongAnswer();
         fifthQuestion();
     });
-
     q4c3.addEventListener("click", function() {
         console.log("fourth question right");
         rightAnswer();
@@ -262,7 +238,6 @@ function fourthQuestion() {
         console.log("score: " + scoreCount);
         fifthQuestion();
     });
-
     q4c4.addEventListener("click", function() {
         console.log("fourth question wrong");
         wrongAnswer();
@@ -273,12 +248,10 @@ function fourthQuestion() {
 
 function fifthQuestion() {
     largeFont.textContent = "To comment out a line of code in JavaScript, you use which of the following?";
-    
     q4c1.remove();
     q4c2.remove();
     q4c3.remove();
     q4c4.remove();
-    
     mediumFont.appendChild(q5c1);
     mediumFont.appendChild(q5c2);
     mediumFont.appendChild(q5c3);
@@ -287,13 +260,10 @@ function fifthQuestion() {
     q5c2.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q5c3.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
     q5c4.setAttribute("style", "font-size: 20px; margin-top: 20px; margin-bottom: 20px;");
-
-
     q5c1.textContent = "//";
     q5c2.textContent = "<comment>";
     q5c3.textContent = "{start comment}";
     q5c4.textContent = "(comment)";
-
     q5c1.addEventListener("click", function() {
         console.log("fifth question right");
         rightAnswer();
@@ -301,44 +271,41 @@ function fifthQuestion() {
         console.log("score: " + scoreCount);
         displayHighScores();
     });
-
     q5c2.addEventListener("click", function() {
         console.log("fifth question wrong");
         wrongAnswer();
         displayHighScores();
     });
-
     q5c3.addEventListener("click", function() {
         console.log("fifth question wrong");
         wrongAnswer();
         displayHighScores();
     });
-
     q5c4.addEventListener("click", function() {
         console.log("fifth question wrong");
         wrongAnswer();
         displayHighScores();
     });
-
 }
 
+// display Correct if answer was correct
 function rightAnswer() {
     mediumFont.appendChild(answerDisplay);
     answerDisplay.setAttribute("style", "font-size: 2em; margin-top: 20px; margin-bottom: 20px;");
     answerDisplay.textContent = "Correct!";
-
 }
+// display Wrong if answer was wrong
 function wrongAnswer() {
     mediumFont.appendChild(answerDisplay);
     answerDisplay.setAttribute("style", "font-size: 2em; margin-top: 20px; margin-bottom: 20px;");
     answerDisplay.textContent = "Incorrect!";
+    // take 10 seconds off timer
     if (timerCount > 10) {
         timerCount = timerCount - 10; }
     else if (timerCount < 10) {
         timerCount = 0;
     }
 }
-
 
 function endGame() {
     //display end game
@@ -349,40 +316,36 @@ function endGame() {
 }
 
 function displayHighScores() {
-    //display high scores
+    //hide the timer
     timerText.remove();
     console.log("display high scores. score: " + scoreCount);
     console.log("timer count: " + timerCount);
     timeElapsed = 60 - timerCount;
-    console.log("time elapsed:" + timerCount);
+    console.log("time elapsed:" + timeElapsed);
     largeFont.textContent = "All done!";
-    mediumFont.textContent = "Your final score is " + scoreCount + timeElapsed;
-    console.log("final score:" + scoreCount + timeElapsed);
-
+    mediumFont.textContent = "Your final score is " + scoreCount + " in " + timeElapsed + " seconds.";
+    console.log("final score:" + scoreCount + " in " + timeElapsed + " seconds.");
     //display initials input
     mediumFont.appendChild(enterInitialsMessage);
     enterInitialsMessage.setAttribute("style", "font-size: 1em; margin-top: 20px; margin-bottom: 20px;");
     enterInitialsMessage.textContent = "Enter initials: ";
-
     //create form to enter initials
     mediumFont.appendChild(enterInitialsInput);
     enterInitialsInput.setAttribute("type", "text");
     enterInitialsInput.setAttribute("placeholder", "Enter initials");
     enterInitialsInput.setAttribute("name", "user-initials");
     enterInitialsInput.setAttribute("id", "user-initials");
-
     mediumFont.appendChild(submitButton);
     submitButton.setAttribute("id","submit-button");
     submitButton.textContent = "Submit";
-
 }
 
 submitButton.addEventListener("click", function(event) {
     event.preventDefault();
     var initials = document.querySelector("#user-initials").value;
-    var initialsAndScore= {
-        initials: initials,
-        score: scoreCount + timeElapsed,
+    var initialsAndScore = {
+        "initials": initials,
+        "score": scoreCount + " in " + timeElapsed + " seconds.",
         };
     console.log(initialsAndScore);
     localStorage.setItem("initialsAndScore", JSON.stringify(initialsAndScore));
@@ -391,33 +354,30 @@ submitButton.addEventListener("click", function(event) {
     highScoresText.textContent = "High Scores";
     highScoresText.setAttribute("style", "font-size: 2em; margin-top: 20px; margin-bottom: 20px;");
     highScoresListEl.append("<li>" + initialsAndScore.initials + " - " + initialsAndScore.score + "</li>");
-    
-
     highScoresListEl.append(goBackButton);
     goBackButton.textContent = "Go Back";
-
     }
 );
 
 function init() {
     //grab any high scores from local storage
-    var storedHighScores = JSON.parse(localStorage.getItem("highScores"));
+    var storedHighScores = JSON.parse(localStorage.getItem("initialsAndScore"));
     if (storedHighScores !== null) {
-        highScores = storedHighScores;
+        highScoresListEl.append("<li>" + storedHighScores.initials + " - " + storedHighScores.score + "</li>");
     }
 }
 
-// if view high scores is clicked, stop timer and end any games in process
+// if view high scores is clicked during quiz, end any games in process
 highScoresLink.addEventListener('click', endGame);
 
 // startGame when startButton is clicked
 startButton.addEventListener('click', startGame);
 
 goBackButton.addEventListener('click', function() {
-highScoresListEl.remove();
-highScoresText.remove();
-goBackButton.remove();
-startGame();
-}
+    highScoresListEl.remove();
+    highScoresText.remove();
+    goBackButton.remove();
+    startGame();
+    }
 );
 
